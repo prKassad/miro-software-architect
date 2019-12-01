@@ -2,9 +2,13 @@
 
 [Miro](https://miro.com) plugin for collaborative design of database schema with ability to generate code.
 
+### Preview
+
 <p align="center">
-    <img src="./docs/demo1.png" width="49.5%" title="Create schema">
-    <img src="./docs/demo2.png" width="49.5%" title="Generate code">
+    <img src="./docs/demo1.png" title="Create schema">
+</p>
+<p align="center">
+    <img src="./docs/demo2.png" title="Generate code">
 </p>
 
 ### Get in Miro
