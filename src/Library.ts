@@ -2,8 +2,10 @@ import {
   genEnitityNameWidget,
   genEnityFieldWidget,
   genEntityFieldsWidget,
-  genInvisibleEdgeWidget
+  genServiceEdgeWidget
 } from "./Helpers";
+
+import { ENTITY_NAME_CONTINER_HEIGHT } from "./Config";
 
 /**
  * Create enitity element
@@ -20,15 +22,15 @@ async function createElement(
 ) {
   const createdWidgets: SDK.IWidget[] = await miro.board.widgets.create([
     genEnitityNameWidget({ x, y, color, name }),
-    genEntityFieldsWidget({ x, y }),
-    genEnityFieldWidget({ x, y })
+    genEntityFieldsWidget({ x, y: y + ENTITY_NAME_CONTINER_HEIGHT }),
+    genEnityFieldWidget({ x, y: y + ENTITY_NAME_CONTINER_HEIGHT })
   ]);
   const ids: string[] = createdWidgets.map(w => w.id);
   // Add service eges for widgets
   let serviceEdges: SDK.IWidget[] = [];
   for (let i = 1; i < ids.length; i++) {
     serviceEdges.push(
-      genInvisibleEdgeWidget({ startWidgetId: ids[0], endWidgetId: ids[i] })
+      genServiceEdgeWidget({ startWidgetId: ids[0], endWidgetId: ids[i] })
     );
   }
   const edgesIds = await miro.board.widgets.create(serviceEdges);
