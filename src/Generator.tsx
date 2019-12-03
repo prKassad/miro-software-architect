@@ -2,7 +2,6 @@ import {
   IAppMetadata,
   IDataBaseEntity,
   IDataBaseModel,
-  IEntityFieldMeta,
   IEntityFieldMetaWithWidgetId,
   IEntityNameMeta,
   WidgetType
@@ -13,11 +12,15 @@ import { APP_ID } from "./Config";
 import { GeneratorModal } from "./Components/Generator/Modal";
 import { findChildrenWidgetIds } from "./Helpers";
 
+/**
+ * Initializе Sidebar
+ */
 async function init() {
   const selectedWidgets = await miro.board.selection.get();
 
-  let entitys: { name: string; widgetId: string }[] = [];
+  let entities: IDataBaseEntity[] = [];
 
+  // Find entities name and widgetId without fields
   selectedWidgets.forEach(async (widget: SDK.IWidget) => {
     const widgetAppMetadata: IAppMetadata = widget.metadata[APP_ID];
     if (
@@ -25,15 +28,16 @@ async function init() {
       widgetAppMetadata.widgetType === WidgetType.ENTITY_NAME_CONTAINER
     ) {
       const name = (widgetAppMetadata.data as IEntityNameMeta).name;
-      entitys.push({ name, widgetId: widget.id });
+      entities.push({ name, widgetId: widget.id, fields: [] });
     }
   });
 
-  Promise.all(
-    entitys.map(async entity => {
-      const reach = await findChildrenWidgetIds(entity.widgetId);
+  // Find fields for entities
+  entities = await Promise.all(
+    entities.map(async entity => {
+      const reachableIds = await findChildrenWidgetIds(entity.widgetId);
       const widgetsByName = selectedWidgets.filter(
-        widget => reach.indexOf(widget.id) !== -1
+        widget => reachableIds.indexOf(widget.id) !== -1
       );
       const fields = widgetsByName
         .map(widget => {
@@ -50,13 +54,16 @@ async function init() {
         })
         .filter(field => field !== undefined);
 
-      return Promise.resolve({ name: entity.name, fields } as IDataBaseEntity);
+      return Promise.resolve({ ...entity, fields } as IDataBaseEntity);
     })
-  ).then(entitis => {
-    const model: IDataBaseModel = { entitis };
-    const contentEl = document.getElementById("content");
-    if (contentEl) render(<GeneratorModal model={model} />, contentEl);
-  });
+  );
+
+  // Final model
+  const model: IDataBaseModel = { entities };
+
+  // Rendel modal windows
+  const contentEl = document.getElementById("content");
+  if (contentEl) render(<GeneratorModal model={model} />, contentEl);
 }
 
 miro.onReady(init);

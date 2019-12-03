@@ -70,7 +70,7 @@ export interface IDataBaseEntity {
 }
 
 export interface IDataBaseModel {
-  entitis: IDataBaseEntity[];
+  entities: IDataBaseEntity[];
 }
 
 export interface IDatabaseGenerator {
