@@ -165,7 +165,7 @@ export class DatabaseEntityEditor extends Component<
           })
         )[0];
         height = nameContainer.bounds.height * 0.8;
-      } else {
+      } else if (this.state.fieldContainers.length) {
         const firstField: SDK.IWidget = (
           await miro.board.widgets.get({
             id: this.state.fieldContainers[0].widgetId
@@ -177,35 +177,37 @@ export class DatabaseEntityEditor extends Component<
       left = fieldsContainer.bounds.left;
     }
 
-    await miro.board.widgets.update({
-      id: this.state.fieldsContainer.widgetId,
-      ...convertStartToCenterCoords(
-        fieldsContainer.bounds.left,
-        fieldsContainer.bounds.top,
-        width,
-        height *
-          (this.state.fieldContainers.length + EMPTY_CELLS_ON_FIELDS_CONTINER)
-      )
-    });
-
-    this.state.fieldContainers.forEach(async (field, index) => {
-      miro.board.widgets.update({
-        id: field.widgetId,
+    if (this.state.fieldContainers.length) {
+      await miro.board.widgets.update({
+        id: this.state.fieldsContainer.widgetId,
         ...convertStartToCenterCoords(
-          left,
-          top + index * height,
+          fieldsContainer.bounds.left,
+          fieldsContainer.bounds.top,
           width,
-          height
-        ),
-        clientVisible: true,
-        metadata: {
-          [APP_ID]: {
-            widgetType: WidgetType.ENTITY_FIELD_CONTINER,
-            data: field
-          }
-        }
+          height *
+            (this.state.fieldContainers.length + EMPTY_CELLS_ON_FIELDS_CONTINER)
+        )
       });
-    });
+
+      this.state.fieldContainers.forEach(async (field, index) => {
+        miro.board.widgets.update({
+          id: field.widgetId,
+          ...convertStartToCenterCoords(
+            left,
+            top + index * height,
+            width,
+            height
+          ),
+          clientVisible: true,
+          metadata: {
+            [APP_ID]: {
+              widgetType: WidgetType.ENTITY_FIELD_CONTINER,
+              data: field
+            }
+          }
+        });
+      });
+    }
   }
 
   render() {
