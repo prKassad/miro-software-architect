@@ -8,7 +8,7 @@ export class MySQLDatabaseGenerator implements IDatabaseGenerator {
   generate(model: IDataBaseModel): string {
     return (
       "# for the purpose of example generators only\n\n" +
-      model.entitis
+      model.entities
         .map(entity => {
           const fields = entity.fields.map(field => {
             const flags: string[] = [];

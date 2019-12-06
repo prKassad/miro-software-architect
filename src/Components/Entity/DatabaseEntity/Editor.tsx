@@ -10,12 +10,13 @@ import {
 import {
   genEnityFieldWidget,
   genFieldTextWidget,
-  genInvisibleEdgeWidget
+  genServiceEdgeWidget
 } from "../../../Helpers";
 
 import { Button } from "../../Reusable/Button";
 import { DatabaseEntityFieldsContainer } from "./Fields";
 import { DatabaseEntityNameContainer } from "./Name";
+import { convertStartToCenterCoords } from "./../../../Helpers";
 
 export interface IEditorProps {
   nameContainer: IEntityNameMetaWithWidgetId;
@@ -82,19 +83,19 @@ export class DatabaseEntityEditor extends Component<
   }
 
   async addField(): Promise<void> {
-    const { x, top, width } = (
+    const { bottom, width, left } = (
       await miro.board.widgets.get({
         id: this.state.fieldsContainer.widgetId
       })
     )[0].bounds;
     const widget: SDK.IWidget[] = await miro.board.widgets.create(
       genEnityFieldWidget({
-        x: x - width / 2,
-        y: top,
+        x: left,
+        y: bottom - 35,
+        width: width,
+        height: 35,
         position: this.state.fieldContainers.length,
         clientVisible: false,
-        width: width,
-        height: 20,
         name: "newField",
         type: DataBaseFieldType.varchar,
         autoIncrement: false,
@@ -109,7 +110,7 @@ export class DatabaseEntityEditor extends Component<
       Object.assign(widget[0].metadata[APP_ID].data, { widgetId: widget[0].id })
     );
     await this.setState({ ...this.state, fieldContainers: newfieldContainers });
-    const edge = genInvisibleEdgeWidget({
+    const edge = genServiceEdgeWidget({
       startWidgetId: this.state.nameContainer.widgetId,
       endWidgetId: widget[0].id
     });
@@ -164,7 +165,7 @@ export class DatabaseEntityEditor extends Component<
           })
         )[0];
         height = nameContainer.bounds.height * 0.8;
-      } else {
+      } else if (this.state.fieldContainers.length) {
         const firstField: SDK.IWidget = (
           await miro.board.widgets.get({
             id: this.state.fieldContainers[0].widgetId
@@ -176,35 +177,37 @@ export class DatabaseEntityEditor extends Component<
       left = fieldsContainer.bounds.left;
     }
 
-    await miro.board.widgets.update({
-      id: this.state.fieldsContainer.widgetId,
-      y:
-        fieldsContainer.bounds.top +
-        (height *
-          (this.state.fieldContainers.length +
-            EMPTY_CELLS_ON_FIELDS_CONTINER)) /
-          2,
-      height:
-        height *
-        (this.state.fieldContainers.length + EMPTY_CELLS_ON_FIELDS_CONTINER)
-    });
-
-    this.state.fieldContainers.forEach(async (field, index) => {
-      miro.board.widgets.update({
-        id: field.widgetId,
-        x: left + width / 2,
-        y: top + height / 2 + index * height,
-        width,
-        height: height,
-        clientVisible: true,
-        metadata: {
-          [APP_ID]: {
-            widgetType: WidgetType.ENTITY_FIELD_CONTINER,
-            data: field
-          }
-        }
+    if (this.state.fieldContainers.length) {
+      await miro.board.widgets.update({
+        id: this.state.fieldsContainer.widgetId,
+        ...convertStartToCenterCoords(
+          fieldsContainer.bounds.left,
+          fieldsContainer.bounds.top,
+          width,
+          height *
+            (this.state.fieldContainers.length + EMPTY_CELLS_ON_FIELDS_CONTINER)
+        )
       });
-    });
+
+      this.state.fieldContainers.forEach(async (field, index) => {
+        miro.board.widgets.update({
+          id: field.widgetId,
+          ...convertStartToCenterCoords(
+            left,
+            top + index * height,
+            width,
+            height
+          ),
+          clientVisible: true,
+          metadata: {
+            [APP_ID]: {
+              widgetType: WidgetType.ENTITY_FIELD_CONTINER,
+              data: field
+            }
+          }
+        });
+      });
+    }
   }
 
   render() {

@@ -131,7 +131,23 @@ export const genFieldTextWidget = ({
 // Widget factories
 //////////////////////////////////////////////////////////////////////
 
-export const genInvisibleEdgeWidget = ({
+/**
+ * Convert start coords to center
+ * @param x
+ * @param y
+ * @param width
+ * @param height
+ */
+export const convertStartToCenterCoords = (
+  x: number,
+  y: number,
+  width: number,
+  height: number
+) => {
+  return { x: x + width / 2, y: y + height / 2, width, height };
+};
+
+export const genServiceEdgeWidget = ({
   startWidgetId,
   endWidgetId
 }: {
@@ -162,11 +178,15 @@ export const genInvisibleEdgeWidget = ({
 export const genEnitityNameWidget = ({
   x = 0,
   y = 0,
+  width = ENTITY_CONTINER_WIDTH,
+  height = ENTITY_NAME_CONTINER_HEIGHT,
   color = "#000",
   name = "newField"
 }: {
   x?: number;
   y?: number;
+  width?: number;
+  height?: number;
   color?: string;
   name?: string;
 }): SDK.IShapeWidget => {
@@ -192,10 +212,7 @@ export const genEnitityNameWidget = ({
       borderWidth: 1,
       borderOpacity: 1
     },
-    x: x + ENTITY_CONTINER_WIDTH / 2,
-    y: y + ENTITY_NAME_CONTINER_HEIGHT / 2 + 1,
-    width: ENTITY_CONTINER_WIDTH,
-    height: ENTITY_NAME_CONTINER_HEIGHT,
+    ...convertStartToCenterCoords(x, y, width, height),
     text: name
   };
 };
@@ -269,14 +286,7 @@ export const genEnityFieldWidget = ({
       [APP_ID]: metadata
     },
     text,
-    x: x + ENTITY_CONTINER_WIDTH / 2,
-    y:
-      y +
-      ENTITY_FIELD_CONTINER_HEIGHT / 2 +
-      ENTITY_NAME_CONTINER_HEIGHT +
-      position * ENTITY_FIELD_CONTINER_HEIGHT,
-    width,
-    height,
+    ...convertStartToCenterCoords(x, y, width, height),
     // @ts-ignore Why params in SDK not optional?
     style: {
       backgroundColor: "transparent",
@@ -292,10 +302,14 @@ export const genEnityFieldWidget = ({
 
 export const genEntityFieldsWidget = ({
   x = 0,
-  y = 0
+  y = 0,
+  width = ENTITY_CONTINER_WIDTH,
+  height = (EMPTY_CELLS_ON_FIELDS_CONTINER + 1) * ENTITY_FIELD_CONTINER_HEIGHT
 }: {
   x?: number;
   y?: number;
+  width?: number;
+  height?: number;
 }): SDK.IShapeWidget => {
   const metadata = {
     widgetType: WidgetType.ENTITY_FIELDS_CONTAINER
@@ -318,13 +332,6 @@ export const genEntityFieldsWidget = ({
       borderOpacity: 1,
       borderStyle: 2
     },
-    x: x + ENTITY_CONTINER_WIDTH / 2,
-    y:
-      y +
-      ((EMPTY_CELLS_ON_FIELDS_CONTINER + 1) * ENTITY_FIELD_CONTINER_HEIGHT) /
-        2 +
-      ENTITY_NAME_CONTINER_HEIGHT,
-    width: ENTITY_CONTINER_WIDTH,
-    height: (EMPTY_CELLS_ON_FIELDS_CONTINER + 1) * ENTITY_FIELD_CONTINER_HEIGHT
+    ...convertStartToCenterCoords(x, y, width, height)
   };
 };
