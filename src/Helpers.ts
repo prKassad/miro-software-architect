@@ -277,7 +277,10 @@ export const genEnityFieldWidget = ({
 			borderColor: 'transparent',
 			fontFamily: 0,
 			fontSize: 12,
+			//TODO: Currently SDK enum's don't transpile into js bundle...
+			// @ts-ignore
 			textAlign: 'l',
+			// @ts-ignore
 			textAlignVertical: 'm',
 			textColor: '#1A1A1A',
 		},
