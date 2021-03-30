@@ -64,10 +64,6 @@ module.exports = env => {
         chunks: ["notAuthorized"]
       }),
       new HtmlWebpackPlugin({
-        template: "./public/auth-success.html",
-        filename: "auth-success.html"
-      }),
-      new HtmlWebpackPlugin({
         template: "./public/generator.html",
         filename: "generator.html",
         chunks: ["generator"]
