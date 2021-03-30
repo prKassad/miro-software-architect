@@ -1,5 +1,5 @@
-export const APP_TITLE: string = "Software Architect";
-export const APP_ID: string = "3074457347056248071";
+export const APP_TITLE: string = 'Software Architect'
+export const APP_ID: string = '3074457347056248071'
 export const APP_ICON: string = `
 <g fill="transparent" stroke="currentColor" stroke-width="1.75" stroke-linejoin="round">
     <rect x="3.7050" y="2.3481" width="16.7533" height="19.7936"/>
@@ -7,7 +7,7 @@ export const APP_ICON: string = `
     <path d="M6.7651,15.6129 L16.1717,15.6129 "/>
     <path d="M6.8062,11.1533 L16.3460,11.1533 "/>
 </g>
-`;
+`
 export const GENERATE_CODE_ICON = `
 <path fill-rule="evenodd" clip-rule="evenodd" d="M6 2H18C20.2091 2 22 3.79086 22 
 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6C2 3.79086 3.79086 
@@ -20,12 +20,12 @@ export const GENERATE_CODE_ICON = `
 10V14.48C10.1786 14.6947 10.2393 14.8673 10.3606 14.998C10.4913 15.1193 10.664 
 15.18 10.8786 15.18C11.952 15.18 12.932 15.1567 13.8186 
 15.11V13.08H11.9986V11.4H16.3386V16.79Z" fill="#050038"/>
-`;
-export const SIDEBAR_PATH: string = "sidebar.html";
-export const LIBRARY_PATH: string = "library.html";
-export const GENERATOR_PATH: string = "generator.html";
-export const NOT_AUTHORIZED_PATH: string = "not-authorized.html";
-export const EMPTY_CELLS_ON_FIELDS_CONTINER: number = 3;
-export const ENTITY_CONTINER_WIDTH: number = 200;
-export const ENTITY_NAME_CONTINER_HEIGHT: number = 35;
-export const ENTITY_FIELD_CONTINER_HEIGHT: number = 30;
+`
+export const SIDEBAR_PATH: string = 'sidebar.html'
+export const LIBRARY_PATH: string = 'library.html'
+export const GENERATOR_PATH: string = 'generator.html'
+export const NOT_AUTHORIZED_PATH: string = 'not-authorized.html'
+export const EMPTY_CELLS_ON_FIELDS_CONTINER: number = 3
+export const ENTITY_CONTINER_WIDTH: number = 200
+export const ENTITY_NAME_CONTINER_HEIGHT: number = 35
+export const ENTITY_FIELD_CONTINER_HEIGHT: number = 30
