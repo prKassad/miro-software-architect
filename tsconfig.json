@@ -1,16 +1,16 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "outDir": "./dist/",
-    "strictNullChecks": true,
-    "allowUnreachableCode": true,
-    "experimentalDecorators": true,
-    "module": "es6",
-    "target": "es5",
-    "moduleResolution": "node",
-    "jsx": "react",
-    "jsxFactory": "h",
-    "allowJs": true
-  },
-  "include": ["src/**/*", "miro.d.ts"]
+	"compilerOptions": {
+		"baseUrl": "./src",
+		"outDir": "./dist/",
+		"strictNullChecks": true,
+		"allowUnreachableCode": true,
+		"experimentalDecorators": true,
+		"module": "es6",
+		"target": "es5",
+		"moduleResolution": "node",
+		"jsx": "react",
+		"jsxFactory": "h",
+		"allowJs": true
+	},
+	"include": ["src/**/*", "miro.d.ts"]
 }

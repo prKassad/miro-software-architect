@@ -1,58 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title></title>
-    <meta charset="UTF-8" />
-    <script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
-  </head>
+	<head>
+		<title></title>
+		<meta charset="UTF-8" />
+		<script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
+	</head>
 
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-    }
+	<style>
+		html,
+		body {
+			margin: 0;
+			padding: 0;
+		}
 
-    #container {
-      overflow-y: auto;
-      overflow-x: hidden;
-      display: flex;
-      flex-wrap: wrap;
-      flex-direction: row;
-      padding-top: 32px;
-      box-sizing: border-box;
-    }
-    .draggable-item {
-      text-align: center;
-      cursor: pointer;
-      margin-left: 32px;
-      margin-bottom: 32px;
-      width: 112px;
-      height: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-      font-size: 18px;
-      font-family: sans-serif;
-    }
+		#container {
+			overflow-y: auto;
+			overflow-x: hidden;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: row;
+			padding-top: 32px;
+			box-sizing: border-box;
+		}
+		.draggable-item {
+			text-align: center;
+			cursor: pointer;
+			margin-left: 32px;
+			margin-bottom: 32px;
+			width: 112px;
+			height: 180px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #fff;
+			font-size: 18px;
+			font-family: sans-serif;
+		}
 
-    .draggable-item.db-entity {
-      background-color: #4262ff;
-    }
+		.draggable-item.db-entity {
+			background-color: #4262ff;
+		}
 
-    .draggable-item.dc-entity {
-      background-color: #827f9b;
-    }
-  </style>
-  <body>
-    <div id="container">
-      <div class="element draggable-item db-entity" data-color="4262ff">
-        Database entity
-      </div>
-      <!-- <div class="element draggable-item dc-entity" data-color="827f9b">
+		.draggable-item.dc-entity {
+			background-color: #827f9b;
+		}
+	</style>
+	<body>
+		<div id="container">
+			<div class="element draggable-item db-entity" data-color="4262ff">Database entity</div>
+			<!-- <div class="element draggable-item dc-entity" data-color="827f9b">
         Diagram class entity
       </div> -->
-    </div>
-  </body>
+		</div>
+	</body>
 </html>

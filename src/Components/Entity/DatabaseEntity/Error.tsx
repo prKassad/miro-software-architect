@@ -1,3 +1,3 @@
-import { h } from "preact";
+import {h} from 'preact'
 
-export const Error = () => <div>Entity damaged or editing another user.</div>;
+export const Error = () => <div>Entity damaged or editing another user.</div>
