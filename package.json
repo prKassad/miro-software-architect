@@ -21,6 +21,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@mirohq/prettier-config": "^1.0.0",
     "preact": "^10.5.13"
-  }
+  },
+  "prettier": "@mirohq/prettier-config"
 }
