@@ -28,16 +28,14 @@ async function init() {
 					}
 				},
 			},
-			getWidgetMenuItems: (widgets) => {
-				return Promise.resolve([
-					{
-						tooltip: 'Generate code',
-						svgIcon: GENERATE_CODE_ICON,
-						onClick: async (widgets) => {
-							await miro.board.ui.openModal(GENERATOR_PATH)
-						},
+			getWidgetMenuItems: (widgets: SDK.IWidget[], editMode: boolean): Promise<SDK.IWidgetMenuItem> => {
+				return Promise.resolve({
+					tooltip: 'Generate code',
+					svgIcon: GENERATE_CODE_ICON,
+					onClick: async () => {
+						await miro.board.ui.openModal(GENERATOR_PATH)
 					},
-				])
+				} as SDK.IWidgetMenuItem)
 			},
 		},
 	})
