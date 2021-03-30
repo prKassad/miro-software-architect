@@ -1,5 +1,3 @@
-import { AUTH_SUCCESS_PATH } from "./Config";
-
 export enum AuthStatus {
   SUCCESS,
   ERROR
@@ -11,8 +9,8 @@ async function init() {
   if (buttonEl) {
     buttonEl.addEventListener("click", function() {
       const authorizeOptions: SDK.AuthorizationOptions = {
-        response_type: "token",
-        redirect_uri: `https://${window.location.host}/${AUTH_SUCCESS_PATH}`
+        response_type: "code",
+        redirect_uri: "/confirm-app-install/"
       };
       miro
         .authorize(authorizeOptions)

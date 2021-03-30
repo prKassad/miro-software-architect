@@ -25,7 +25,6 @@ export const SIDEBAR_PATH: string = "sidebar.html";
 export const LIBRARY_PATH: string = "library.html";
 export const GENERATOR_PATH: string = "generator.html";
 export const NOT_AUTHORIZED_PATH: string = "not-authorized.html";
-export const AUTH_SUCCESS_PATH: string = "auth-success.html";
 export const EMPTY_CELLS_ON_FIELDS_CONTINER: number = 3;
 export const ENTITY_CONTINER_WIDTH: number = 200;
 export const ENTITY_NAME_CONTINER_HEIGHT: number = 35;
