@@ -13,7 +13,7 @@
 
 ### Get in Miro
 
-Follow [this link](https://miro.com/oauth/authorize/?response_type=token&client_id=3074457347056248071&redirect_uri=/) and add plugin to your team.
+Follow [this link](https://miro.com/oauth/authorize/?response_type=code&client_id=3074457347056248071&redirect_uri=/confirm-app-install/) and add plugin to your team.
 
 ### Features
 
